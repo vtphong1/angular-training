@@ -9,14 +9,6 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { Accounts } from './core/data/account';
 import * as faker from 'faker';
-import {
-  ActivatedRoute,
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationStart,
-  Router,
-} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -151,7 +143,7 @@ export class AppComponent implements OnInit {
     this.getAllAccount();
   }
   delete(acc: Account) {
-    this.loading=true;
+    this.loading = true;
     const delAccount = createAccount({
       ...acc,
     });

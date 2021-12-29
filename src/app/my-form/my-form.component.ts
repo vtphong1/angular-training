@@ -18,8 +18,9 @@ export class MyFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+
     this.myForm = this.fb.group({
-      _id: ['', Validators.required],
+      _id: [''],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       age: [null, [Validators.required, Validators.min(18)]],
@@ -35,10 +36,6 @@ export class MyFormComponent implements OnInit {
             '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$'
           ),
         ],
-      ],
-      phonenumber: [
-        null,
-        [Validators.required, Validators.pattern('[0-9]{9,}')],
       ],
       city: [''],
       state: [''],
@@ -64,14 +61,14 @@ export class MyFormComponent implements OnInit {
     this.clickCloseForm.emit(false);
   }
   onSubmit() {
-    // if (this.myForm.valid) {
-    //   this.clickSubmit.emit(this.myForm.value);
-    // } else {
-    //   for (let i in this.myForm.controls) {
-    //     this.myForm.controls[i].markAsTouched();
-    //   }
-    // }
+    if (this.myForm.valid) {
+      this.clickSubmit.emit(this.myForm.value);
+    } else {
+      for (let i in this.myForm.controls) {
+        this.myForm.controls[i].markAsTouched();
+      }
+    }
 
-    this.clickSubmit.emit(this.myForm.value);
+    // this.clickSubmit.emit(this.myForm.value);
   }
 }
