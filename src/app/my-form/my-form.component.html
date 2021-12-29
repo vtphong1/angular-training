@@ -1,0 +1,168 @@
+<div class="wrapper">
+  <button class="close" (click)="closeForm()">x</button>
+  <div class="title">Customer Information</div>
+  <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="inputfield">
+      <label>First Name</label>
+
+      <div class="inputError">
+        <input
+          type="text"
+          class="input"
+          formControlName="firstname"
+          [style.border]="
+            myForm.controls.firstname?.touched &&
+            myForm.controls.firstname?.errors?.required
+              ? '1px solid red'
+              : ''
+          "
+        />
+        <div
+          *ngIf="
+            myForm.get('firstname')?.errors?.required &&
+            myForm.get('firstname')?.touched
+          "
+        >
+          <span>First name is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Last Name</label>
+      <div class="inputError">
+        <input
+          type="text"
+          class="input"
+          formControlName="lastname"
+          [style.border]="
+            myForm.controls.lastname?.touched &&
+            myForm.controls.lastname?.errors?.required
+              ? '1px solid red'
+              : ''
+          "
+        />
+        <div
+          *ngIf="
+            myForm.get('lastname')?.errors?.required &&
+            myForm.get('lastname')?.touched
+          "
+        >
+          <span>Last name is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Age</label>
+      <div class="inputError">
+        <input
+          type="number"
+          class="input"
+          formControlName="age"
+          [style.border]="
+            myForm.controls.age?.touched &&
+            myForm.controls.age?.errors?.required
+              ? '1px solid red'
+              : ''
+          "
+        />
+        <div
+          *ngIf="
+            myForm.get('age')?.errors?.required && myForm.get('age')?.touched
+          "
+        >
+          <span>Age is required</span>
+        </div>
+        <div
+          *ngIf="myForm.get('age')?.errors?.min && myForm.get('age')?.touched"
+        >
+          <span>Age must bigger than 18</span>
+        </div>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Gender</label>
+      <div class="custom_select">
+        <select formControlName="gender">
+          <option value="">Select</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Address</label>
+      <div class="inputError">
+        <input
+          type="text"
+          class="input"
+          formControlName="address"
+          [style.border]="
+            myForm.controls.address?.touched &&
+            myForm.controls.address?.errors?.required
+              ? '1px solid red'
+              : ''
+          "
+        />
+        <div
+          *ngIf="
+            myForm.get('address')?.errors?.required &&
+            myForm.get('address')?.touched
+          "
+        >
+          <span>Last name is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>Employer</label>
+      <input type="text" class="input" formControlName="employer" />
+    </div>
+    <div class="inputfield">
+      <label>Email Address</label>
+      <div class="inputError">
+        <input
+          type="text"
+          class="input"
+          formControlName="email"
+          [style.border]="
+            myForm.controls.email?.touched &&
+            myForm.controls.email?.errors?.required
+              ? '1px solid red'
+              : ''
+          "
+        />
+        <div
+          *ngIf="
+            myForm.get('email')?.errors?.required &&
+            myForm.get('email')?.touched
+          "
+        >
+          <span>Email is required</span>
+        </div>
+        <div
+          *ngIf="
+            myForm.get('email')?.errors?.pattern && myForm.get('email')?.touched
+          "
+        >
+          <span>Email is not pattern</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="inputfield">
+      <label>City: </label>
+      <div class="inputError">
+        <input type="text" class="input" formControlName="city" />
+      </div>
+    </div>
+    <div class="inputfield">
+      <label>State</label>
+      <div class="inputError">
+        <input type="text" class="input" formControlName="state" />
+      </div>
+    </div>
+    <div class="inputfield">
+      <input type="submit" value="Save" class="btn" />
+    </div>
+  </form>
+</div>

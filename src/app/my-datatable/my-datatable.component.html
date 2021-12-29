@@ -1,0 +1,76 @@
+<div *ngIf='loading' id="myModal" class="modal">
+  <div class="lds-roller">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<div class="table">
+  <div class="search">
+    <input
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="searchStr"
+      (ngModelChange)="search()"
+    />
+    <button mat-button type="button" class="btn btn-success" (click)="openAddAccount()">
+      &#10010; Add
+    </button>
+  </div>
+  <table>
+    <thead>
+      <tr class="table-dark">
+        <th>STT</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Blance</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th style="text-align: right">Thao tác</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let account of account
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: account.length
+                };
+          let index = index
+        "
+      >
+        <td>{{ index + 1 + (page - 1) * itemsPerPage }}</td>
+        <td>{{ account.firstname }} {{ account.lastname }}</td>
+        <td>{{ account.age }}</td>
+        <td>{{ account.balance }}</td>
+        <td>{{ account.address }}</td>
+        <td>{{ account.gender }}</td>
+        <td style="text-align: right">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="openEdit(account)"
+          >
+            &#9999; Sửa</button
+          >&nbsp;
+          <button type="button" class="btn btn-danger" (click)="delete(account)">
+            &#10005; Xóa
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="page = $event" (pageBoundsCorrection)="page = $event"></pagination-controls>
+  </div>
+</div>
+
+

@@ -1,0 +1,24 @@
+<div class="listAccount">
+  <app-my-datatable
+    [account]="account"
+    (mySearch)="search($event)"
+    [page]="page"
+    [loading]="loading"
+    [itemsPerPage]="itemsPerPage"
+    [totalItems]="totalItems"
+    (clickEdit)="openEdit($event)"
+    (clickDelete)="delete($event)"
+    (clickAdd)="openAddAccount()"
+  ></app-my-datatable>
+
+  <div class="addEdit" *ngIf="isOpenEditAccount || isOpenAddAccount">
+    <div class="addEdit-model"></div>
+    <app-my-form
+      [selectedAccount]="selectedAccount"
+      (clickCloseForm)="closeForm($event)"
+      (clickSubmit)="saveOrEdit($event)"
+      [isOpenAddAccount]="isOpenAddAccount"
+      [isOpenEditAccount]="isOpenEditAccount"
+    ></app-my-form>
+  </div>
+</div>
