@@ -7,7 +7,7 @@ import { Account } from '../core/model/account.model';
   styleUrls: ['./my-datatable.component.scss'],
 })
 export class MyDatatableComponent implements OnInit {
-  @Input() account: Account[] = [];
+  @Input() account: any[] = [];
   @Output() clickEdit = new EventEmitter();
   @Output() clickDelete = new EventEmitter();
   @Output() clickAdd = new EventEmitter();
@@ -16,8 +16,10 @@ export class MyDatatableComponent implements OnInit {
   @Input() itemsPerPage: number = 10;
   @Input() totalItems: number | undefined;
   @Input() page: number = 1;
+  @Input() columns: any[] = [];
+  @Output() clsortByAge =new EventEmitter();
 
-  @Input() loading!:boolean;
+  @Input() loading!: boolean;
   constructor() {}
 
   ngOnInit(): void {}
@@ -32,5 +34,8 @@ export class MyDatatableComponent implements OnInit {
   }
   search() {
     this.mySearch.emit(this.searchStr);
+  }
+  sortByAge(){
+    this.clsortByAge.emit();
   }
 }

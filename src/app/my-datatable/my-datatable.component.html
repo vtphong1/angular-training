@@ -1,4 +1,4 @@
-<div *ngIf='loading' id="myModal" class="modal">
+<div *ngIf="loading" id="myModal" class="modal">
   <div class="lds-roller">
     <div></div>
     <div></div>
@@ -18,13 +18,18 @@
       [(ngModel)]="searchStr"
       (ngModelChange)="search()"
     />
-    <button mat-button type="button" class="btn btn-success" (click)="openAddAccount()">
+    <button
+      mat-button
+      type="button"
+      class="btn btn-success"
+      (click)="openAddAccount()"
+    >
       &#10010; Add
     </button>
   </div>
   <table>
     <thead>
-      <tr class="table-dark">
+      <!-- <tr class="table-dark">
         <th>STT</th>
         <th>Name</th>
         <th>Age</th>
@@ -32,6 +37,17 @@
         <th>Address</th>
         <th>Gender</th>
         <th style="text-align: right">Thao tác</th>
+      </tr> -->
+      <tr class="table-dark">
+        <th
+          *ngFor="let item of columns"
+          [ngStyle]="{
+            'text-align': item.field == 'action' ? item.textAlign : null
+          }"
+        >
+        <span *ngIf="item.field=='age'; else Thdefault">{{ item.label }}&ensp; <i (click)="sortByAge()" class="fas fa-sort"></i></span>
+        <ng-template #Thdefault>{{item.label}}</ng-template>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -47,7 +63,7 @@
           let index = index
         "
       >
-        <td>{{ index + 1 + (page - 1) * itemsPerPage }}</td>
+        <!-- <td>{{ index + 1 + (page - 1) * itemsPerPage }}</td>
         <td>{{ account.firstname }} {{ account.lastname }}</td>
         <td>{{ account.age }}</td>
         <td>{{ account.balance }}</td>
@@ -61,16 +77,53 @@
           >
             &#9999; Sửa</button
           >&nbsp;
-          <button type="button" class="btn btn-danger" (click)="delete(account)">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="delete(account)"
+          >
             &#10005; Xóa
           </button>
+        </td> -->
+        <td
+          *ngFor="let item of columns"
+          [ngStyle]="{
+            'text-align': item.field == 'action' ? item.textAlign : null
+          }"
+        >
+          <ng-container [ngSwitch]="item.field">
+            <span *ngSwitchDefault>{{ account[item.field] }}</span>
+            <span *ngSwitchCase="'fullname'"
+              >{{ account.firstname }} {{ account.lastname }}</span
+            >
+            <span *ngSwitchCase="'stt'">{{
+              index + 1 + (page - 1) * itemsPerPage
+            }}</span>
+            <span *ngSwitchCase="'action'"
+              ><button
+                type="button"
+                class="btn btn-primary"
+                (click)="openEdit(account)"
+              >
+                &#9999; Sửa</button
+              >&nbsp;
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="delete(account)"
+              >
+                &#10005; Xóa
+              </button></span
+            >
+          </ng-container>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="pagination">
-    <pagination-controls (pageChange)="page = $event" (pageBoundsCorrection)="page = $event"></pagination-controls>
+    <pagination-controls
+      (pageChange)="page = $event"
+      (pageBoundsCorrection)="page = $event"
+    ></pagination-controls>
   </div>
 </div>
-
-

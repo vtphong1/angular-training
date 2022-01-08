@@ -24,6 +24,40 @@ export class AppComponent implements OnInit {
   selectedAccount!: Account;
   searchStr = '';
 
+  sortAge = true;
+
+  columns = [
+    {
+      field: 'stt',
+      label: 'STT',
+    },
+    {
+      field: 'fullname',
+      label: 'Tên',
+    },
+    {
+      field: 'age',
+      label: 'Tuổi',
+    },
+    {
+      field: 'balance',
+      label: 'Số tài khoản',
+    },
+    {
+      field: 'address',
+      label: 'Địa chỉ',
+    },
+    {
+      field: 'gender',
+      label: 'Giới tính',
+    },
+    {
+      field: 'action',
+      label: 'Thao tác',
+      textAlign: 'right',
+    },
+  ];
+
   itemsPerPage = 10;
   totalItems: number | undefined;
   page = 1;
@@ -177,5 +211,13 @@ export class AppComponent implements OnInit {
         this.saveEdit();
       }, 1000);
     }
+  }
+  sortByAge(){
+    if(this.sortAge){
+      this.account=this.account.sort((a,b)=>a.age-b.age)
+    }else{
+      this.account=this.account.sort((a,b)=>b.age-a.age);
+    }
+    this.sortAge=!this.sortAge;
   }
 }

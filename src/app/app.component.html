@@ -1,6 +1,7 @@
 <div class="listAccount">
   <app-my-datatable
     [account]="account"
+    [columns]="columns"
     (mySearch)="search($event)"
     [page]="page"
     [loading]="loading"
@@ -9,6 +10,7 @@
     (clickEdit)="openEdit($event)"
     (clickDelete)="delete($event)"
     (clickAdd)="openAddAccount()"
+    (clsortByAge)="sortByAge()"
   ></app-my-datatable>
 
   <div class="addEdit" *ngIf="isOpenEditAccount || isOpenAddAccount">
