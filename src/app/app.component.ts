@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   searchStr = '';
   searchAdd = '';
   searchGen = '';
+  searchEmail='';
 
   sortAge = true;
 
@@ -40,6 +41,10 @@ export class AppComponent implements OnInit {
     {
       field: 'age',
       label: 'Tuổi',
+    },
+    {
+      field: 'email',
+      label: 'Email',
     },
     {
       field: 'balance',
@@ -87,6 +92,7 @@ export class AppComponent implements OnInit {
           last_name: this.searchStr,
           address: this.searchAdd,
           gender: this.searchGen,
+          email:this.searchEmail,
           start: 0,
           limit: 1000,
         })
@@ -177,9 +183,12 @@ export class AppComponent implements OnInit {
   }
 
   search(e: any): void {
+    console.log(e);
+
     this.searchStr = e[0];
     this.searchAdd = e[1];
-    this.searchGen=e[2];
+    this.searchEmail = e[2];
+    this.searchGen=e[3];
     this.getAllAccount();
   }
   delete(acc: Account) {

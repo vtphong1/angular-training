@@ -24,8 +24,14 @@
       [(ngModel)]="searchAdd"
       (ngModelChange)="search()"
     />
+    <input
+      type="text"
+      placeholder="Search email"
+      [(ngModel)]="searchEmail"
+      (ngModelChange)="search()"
+    />
     <select (change)="search()" [(ngModel)]="searchGen">
-      <option value="">Select</option>
+      <option value="">Gender</option>
       <option value="M">Male</option>
       <option value="F">Female</option>
     </select>

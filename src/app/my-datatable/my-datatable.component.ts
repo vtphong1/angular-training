@@ -13,7 +13,8 @@ export class MyDatatableComponent implements OnInit {
   @Output() clickAdd = new EventEmitter();
   @Input() searchStr = '';
   @Input() searchAdd = '';
-  @Input() searchGen='';
+  @Input() searchGen = '';
+  @Input() searchEmail='';
   @Output() mySearch = new EventEmitter();
   @Input() itemsPerPage: number = 10;
   @Input() totalItems: number | undefined;
@@ -35,7 +36,7 @@ export class MyDatatableComponent implements OnInit {
     this.clickAdd.emit();
   }
   search() {
-    this.mySearch.emit([this.searchStr, this.searchAdd, this.searchGen]);
+    this.mySearch.emit([this.searchStr, this.searchAdd, this.searchEmail ,this.searchGen]);
   }
   sortByAge() {
     this.clsortByAge.emit();
