@@ -8,7 +8,8 @@
   display: flex;
   justify-content: space-between;
 }
-.search input {
+
+.search input, select {
   border: 1px solid black;
   outline: 1px solid black;
   border-radius: 5px;

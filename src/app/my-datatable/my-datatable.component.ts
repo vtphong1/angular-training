@@ -12,12 +12,14 @@ export class MyDatatableComponent implements OnInit {
   @Output() clickDelete = new EventEmitter();
   @Output() clickAdd = new EventEmitter();
   @Input() searchStr = '';
+  @Input() searchAdd = '';
+  @Input() searchGen='';
   @Output() mySearch = new EventEmitter();
   @Input() itemsPerPage: number = 10;
   @Input() totalItems: number | undefined;
   @Input() page: number = 1;
   @Input() columns: any[] = [];
-  @Output() clsortByAge =new EventEmitter();
+  @Output() clsortByAge = new EventEmitter();
 
   @Input() loading!: boolean;
   constructor() {}
@@ -33,9 +35,9 @@ export class MyDatatableComponent implements OnInit {
     this.clickAdd.emit();
   }
   search() {
-    this.mySearch.emit(this.searchStr);
+    this.mySearch.emit([this.searchStr, this.searchAdd, this.searchGen]);
   }
-  sortByAge(){
+  sortByAge() {
     this.clsortByAge.emit();
   }
 }

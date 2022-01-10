@@ -14,10 +14,21 @@
   <div class="search">
     <input
       type="text"
-      placeholder="Search"
+      placeholder="Search name"
       [(ngModel)]="searchStr"
       (ngModelChange)="search()"
     />
+    <input
+      type="text"
+      placeholder="Search address"
+      [(ngModel)]="searchAdd"
+      (ngModelChange)="search()"
+    />
+    <select (change)="search()" [(ngModel)]="searchGen">
+      <option value="">Select</option>
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+    </select>
     <button
       mat-button
       type="button"
@@ -45,8 +56,11 @@
             'text-align': item.field == 'action' ? item.textAlign : null
           }"
         >
-        <span *ngIf="item.field=='age'; else Thdefault">{{ item.label }}&ensp; <i (click)="sortByAge()" class="fas fa-sort"></i></span>
-        <ng-template #Thdefault>{{item.label}}</ng-template>
+          <span *ngIf="item.field == 'age'; else Thdefault"
+            >{{ item.label }}&ensp;
+            <i (click)="sortByAge()" class="fas fa-sort"></i
+          ></span>
+          <ng-template #Thdefault>{{ item.label }}</ng-template>
         </th>
       </tr>
     </thead>

@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
   isOpenEditAccount = false;
   selectedAccount!: Account;
   searchStr = '';
+  searchAdd = '';
+  searchGen = '';
 
   sortAge = true;
 
@@ -83,6 +85,8 @@ export class AppComponent implements OnInit {
       .getAccounts(
         createParamSearch({
           last_name: this.searchStr,
+          address: this.searchAdd,
+          gender: this.searchGen,
           start: 0,
           limit: 1000,
         })
@@ -173,7 +177,9 @@ export class AppComponent implements OnInit {
   }
 
   search(e: any): void {
-    this.searchStr = e;
+    this.searchStr = e[0];
+    this.searchAdd = e[1];
+    this.searchGen=e[2];
     this.getAllAccount();
   }
   delete(acc: Account) {
@@ -212,12 +218,12 @@ export class AppComponent implements OnInit {
       }, 1000);
     }
   }
-  sortByAge(){
-    if(this.sortAge){
-      this.account=this.account.sort((a,b)=>a.age-b.age)
-    }else{
-      this.account=this.account.sort((a,b)=>b.age-a.age);
+  sortByAge() {
+    if (this.sortAge) {
+      this.account = this.account.sort((a, b) => a.age - b.age);
+    } else {
+      this.account = this.account.sort((a, b) => b.age - a.age);
     }
-    this.sortAge=!this.sortAge;
+    this.sortAge = !this.sortAge;
   }
 }
